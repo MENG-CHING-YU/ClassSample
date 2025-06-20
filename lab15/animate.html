@@ -4,28 +4,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lab15</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <title>lab1</title>
     <style>
         body {
             font-size: 17px;
             font-family: Arial, Helvetica, sans-serif;
-            background-color: aliceblue;
+            background-color: #fff;
         }
 
         header {
             background-color: black;
-            color: aquamarine;
-            Padding: 20px;
+            color: lightgreen;
+            /* 內距 */
+            padding: 20px;
+            /* 文字置中 */
             text-align: center;
         }
 
         .container {
             width: 90%;
-
+            /* 外距 */
             margin: auto;
+
             padding: 10px;
-            float: left;
         }
 
         .box {
@@ -35,39 +37,38 @@
             position: relative;
             top: 0;
             left: 0;
-
         }
 
         .box1 {
             background-color: pink;
-            animation-name: example;
-            animation-duration: 2s;
         }
     </style>
 </head>
 
 <body>
     <header>
-        <h1></h1>
+        <h1>animate()</h1>
     </header>
     <div class="container">
         <button id="moveRight">moveRight</button>
-        <button id="moveLeft">moveLeft</button>
+        <button id="moveLeft">moveleft</button>
         <button id="moveAround">moveAround</button>
+        <button class="btn">flash</button>
+        <button class="btn">jello</button>
+        <button class="btn">tada</button>
+        <!-- <div class="box box1 animate__animated animate__bounce"></div> -->
         <div class="box box1"></div>
-
     </div>
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script>
-
         $(function () {
+            // javascript code
             $('#moveRight').click(function () {
                 $('.box1').animate({
                     left: 500,
                     width: 300,
-                    height: 300
+                    height: 300,
+                    'border-radius': '50%'
                 }, 2000)
             })
             $('#moveLeft').click(function () {
@@ -80,7 +81,7 @@
             $('#moveAround').click(function () {
                 $('.box1').animate({
                     left: 500
-                }, 2000).animate({
+                }, 1000).animate({
                     left: 500,
                     top: 500
                 }, 1000).animate({
@@ -88,14 +89,31 @@
                 }, 1000).animate({
                     top: 0
                 }, 1000)
-
             })
 
+            // animcate css
+            const animateCSS = (element, animation, prefix = 'animate__') =>
+                // We create a Promise and return it
+                new Promise((resolve, reject) => {
+                    const animationName = `${prefix}${animation}`;
+                    const node = document.querySelector(element);
 
+                    node.classList.add(`${prefix}animated`, animationName);
 
+                    // When the animation ends, we clean the classes and resolve the Promise
+                    function handleAnimationEnd(event) {
+                        event.stopPropagation();
+                        node.classList.remove(`${prefix}animated`, animationName);
+                        resolve('Animation ended');
+                    }
+
+                    node.addEventListener('animationend', handleAnimationEnd, { once: true });
+                });
+
+            $('.btn').click(function () {
+                animateCSS('.box1', $(this).text());
+            })
         })
-
-
     </script>
 </body>
 
