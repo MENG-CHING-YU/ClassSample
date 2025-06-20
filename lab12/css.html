@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lab12</title>
+    <style>
+        body {
+            font-size: 17px;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #fff;
+        }
+
+        header {
+            background-color: black;
+            color: lightgreen;
+            /* 內距 */
+            padding: 20px;
+            /* 文字置中 */
+            text-align: center;
+        }
+
+        .container {
+            width: 90%;
+            /* 外距 */
+            margin: auto;
+            padding: 10px;
+        }
+
+        .target {
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: inline-block;
+            margin: 5px;
+        }
+
+        .wrapper {
+            width: 800px;
+            height: 400px;
+            background-color: lightgray;
+            position: relative;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>css()</h1>
+    </header>
+    <div class="container">
+        <div class="wrapper">
+            <div class="target"></div>
+        </div>
+        <hr>
+        <div class="circle" style="background-color: red;"></div>
+        <div class="circle" style="background-color: orange;"></div>
+        <div class="circle" style="background-color: yellow;"></div>
+        <div class="circle" style="background-color: green;"></div>
+        <div class="circle" style="background-color: blue;"></div>
+        <div class="circle" style="background-color: blueviolet;"></div>
+        <div class="circle" style="background-color: purple;"></div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script>
+        $(function () {
+            // javascript code
+            /*
+                css('','') 設定css樣式
+                css('')讀取css樣式
+
+                css({
+                    '':'',
+                    '':'',
+                })
+            */
+
+            $('.circle').mouseenter(function () {
+                let color = $(this).css('background-color');
+                console.log(color);
+                $('.target').css('background-color', color);
+            })
+
+            document.onkeydown = function (event) {
+                switch (event.keyCode) {
+                    /* 
+                        上 38 top -
+                        下 40 top +
+                        左 37 left -
+                        右 39 left +
+                    */
+                    case 39:
+                        if (parseInt($('.target').css('left')) < 700) {
+                            $('.target').css({
+                                left: '+=' + 30,
+                                background: 'pink'
+                            })
+                        } else {
+                            $('.target').css('left', 700)
+                        }
+                        break;
+                    case 37:
+                        if (parseInt($('.target').css('left')) > 0) {
+                            $('.target').css({
+                                left: '-=' + 30,
+                                background: 'lightblue'
+                            })
+                        } else {
+                            $('.target').css('left', 0)
+                        }
+                        break;
+                    case 38:
+                        if (parseInt($('.target').css('top')) > 0) {
+                            $('.target').css({
+                                top: '-=' + 30,
+                                background: 'lightgreen'
+                            })
+                        } else {
+                            $('.target').css('top', 0);
+                        }
+                        break;
+                    case 40:
+                        if (parseInt($('.target').css('top')) < 300) {
+                            $('.target').css({
+                                top: '+=' + 30,
+                                background: 'yellow'
+                            })
+                        } else {
+                            $('.target').css('top', 300);
+                        }
+                        break;
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

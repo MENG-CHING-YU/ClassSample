@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lab13</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <style>
+        body {
+            font-size: 17px;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #fff;
+        }
+
+        header {
+            background-color: black;
+            color: lightgreen;
+            /* 內距 */
+            padding: 20px;
+            /* 文字置中 */
+            text-align: center;
+        }
+
+        .container {
+            width: 90%;
+            /* 外距 */
+            margin: auto;
+            padding: 10px;
+        }
+
+        .wrapper {
+            width: 800px;
+            height: 400px;
+            margin: 0 auto;
+            position: relative;
+            background-color: red;
+            overflow: hidden;
+        }
+
+        .ul-slideShow {
+            position: absolute;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            display: flex;
+            width: 4000px;
+            left: 0;
+        }
+
+        .ul-slideShow li {
+            width: 800px;
+            height: 400px;
+        }
+
+        .ul-slideShow li img {
+            width: 100%;
+            height: 100%;
+            /* 調整內容比例大小 但原圖會被裁切 */
+            object-fit: cover;
+        }
+
+        .ul-pages {
+            position: absolute;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            /* background-color: red; */
+            bottom: 10px;
+            display: flex;
+            width: 100%;
+            /* 主軸置中 */
+            justify-content: center;
+        }
+
+        .ul-pages li {
+            width: 20px;
+            height: 20px;
+            border: 1px solid #fff;
+            border-radius: 50%;
+            margin: 5px;
+        }
+
+        .arrow {
+            position: absolute;
+            z-index: 1;
+            font-size: 36px;
+            /* background-color: red; */
+            height: 100%;
+            width: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            opacity: 0.6;
+            cursor: pointer;
+        }
+
+        .arrow:hover {
+            opacity: 1;
+        }
+
+        .right {
+            right: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>廣告輪播</h1>
+    </header>
+    <div class="container">
+        <div class="wrapper">
+            <a class="arrow" id="slidePrev"><i class="fa-solid fa-chevron-left"></i></a>
+            <a class="arrow right" id="slideNext"><i class="fa-solid fa-chevron-right"></i></a>
+            <ul class="ul-slideShow">
+                <li><img src="./img/photo1.jpg" alt=""></li>
+                <li><img src="./img/photo2.jpg" alt=""></li>
+                <li><img src="./img/photo3.jpg" alt=""></li>
+                <li><img src="./img/photo4.jpg" alt=""></li>
+                <li><img src="./img/photo5.jpg" alt=""></li>
+            </ul>
+            <ul class="ul-pages">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script>
+        $(function () {
+            // javascript code
+            /*
+                1.設定整體輪播範圍樣式
+                    1-1.放第一張圖
+                    1-2.放五張圖
+                    1-3.確認移動邏輯
+                2.設定分頁樣式
+                3.分頁移動
+                4.分頁換色
+                5.設定箭頭樣式
+                6.箭頭移動
+                7.廣告輪播
+            */
+            let total = $('.ul-slideShow li').length;
+
+            let index = 0;
+            $('.ul-pages li').eq(0).css('background', 'white');
+            // 分頁換圖功能
+            $('.ul-pages li').mouseenter(function () {
+                // $('.ul-slideShow').css('left', '-800px');
+                index = $(this).index();
+                // console.log(index);
+                // // 移動邏輯
+                // let slideMove = 0 - index * 800;
+                // $('.ul-slideShow').css('left', slideMove);
+                // // 分頁換色邏輯
+                // $(this).css('background', 'white').siblings().css('background', 'transparent');
+                moveSlide();
+            })
+
+            // 右邊箭頭換圖
+            $('#slideNext').click(function () {
+                index++;
+                if (index >= 5) {
+                    index = 0;
+                }
+                // // 移動邏輯
+                // let slideMove = 0 - index * 800;
+                // $('.ul-slideShow').css('left', slideMove);
+                // // 分頁換色邏輯
+                // $('.ul-pages li').css('background', 'white').siblings().css('background', 'transparent');
+                moveSlide();
+            })
+
+            function moveSlide() {
+                // 移動邏輯
+                let slideMove = 0 - index * 800;
+                $('.ul-slideShow').css('left', slideMove);
+                // 分頁換色邏輯
+                $('.ul-pages li').eq(index).css('background', 'white')
+                    .siblings().css('background', 'transparent');
+            }
+
+            //左邊箭頭移動
+            $('#slidePrev').click(function () {
+                index--;
+                if (index < 0) {
+                    index = 4;
+                }
+                moveSlide();
+            })
+            setInterval(function () {
+                index++;
+                if (index >= total) {
+                    index = 0;
+                }
+                moveSlide();  // 正確呼叫函式
+            }, 2000);
+        })
+    </script>
+</body>
+
+</html>

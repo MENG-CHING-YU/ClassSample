@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lab1</title>
+    <style>
+        body {
+            font-size: 17px;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: aliceblue;
+        }
+
+        header {
+            background-color: black;
+            color: aquamarine;
+            Padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            width: 90%;
+
+            margin: auto;
+            padding: 10px;
+            float: left;
+        }
+
+        .out {
+            height: 250px;
+            width: 40%;
+            margin: 0 15px;
+            background-color: lightgreen;
+            float: left;
+        }
+
+        .in {
+            width: 60%;
+            height: 60%;
+            background-color: lightblue;
+            margin: 10px auto;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Mouse</h1>
+    </header>
+    <div class="container">
+        <button id="btn">buttom</button>
+        <hr>
+        <div class="out overout">
+            <span>move your mouse</span>
+            <div class="in"></div>
+        </div>
+        <div class="out enterleave">
+            <span>move your mouse</span>
+            <div class="in"></div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+
+        $(function () {
+
+            //雙擊事件dblclick()
+            $('#btn').dblclick(function () {
+                console.log('double click');
+
+            })
+            //contextmenu事件(右鍵點擊)
+            $('#btn').contextmenu(function () {
+                console.log('right click');
+                //取消右鍵選單
+
+            })
+            //mousedown事件(按下滑鼠)
+            $('#btn').mouseup(function (event) {
+                console.log('mouse up');
+
+            })
+            let countOverout = 0;
+            $('div.overout').mouseover(function () {
+                countOverout += 1;
+                $(this).find('span').text(`overout:${countOverout}`);
+            })
+            let countEnterleave = 0;
+            $('div.enterleave').mouseenter(function () {
+                countEnterleave += 1;
+                $(this).find('span').text(`enterleave:${countEnterleave}`);
+            })
+
+        })
+
+
+    </script>
+</body>
+
+</html>

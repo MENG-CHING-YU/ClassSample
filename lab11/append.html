@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lab1</title>
+    <style>
+        body {
+            font-size: 17px;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: aliceblue;
+        }
+
+        header {
+            background-color: black;
+            color: aquamarine;
+            Padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            width: 90%;
+
+            margin: auto;
+            padding: 10px;
+            float: left;
+        }
+
+        table {
+            border: 2px solid black;
+            width: 500px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1></h1>
+    </header>
+    <div class="container">
+        <button id="appendTo">append</button>
+        <button id="append">appendTo</button>
+        <button id="prepend">prepend</button>
+        <button id="prependTo">prependTo</button>
+        <button id="before">before</button>
+        <button id="after">after</button>
+        <button id="inserbefore">inserbefore</button>
+        <button id="inserafter">inserafter</button>
+        <button id="empty">empty</button>
+        <button id="remove">remove</button>
+        <hr>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr id="move">
+                    <td>0 Gary</td>
+                    <td>garylee@ispan.com.tw</td>
+                    <td>0987412596</td>
+                </tr>
+            </tbody>
+        </table>
+
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+
+        $(function () {
+            let i = 1
+            $('#append').click(function () {
+                let content = `<tr>
+                    <td>${i} append</td>
+                    <td>append@ispan.com.tw</td>
+                    <td>095563475</td>
+                    </tr>`;
+                $('tbody').append(content);
+                i++
+            })
+
+            $('#prepend').click(function () {
+                let content = `<tr>
+                    <td>${i} prepend</td>
+                    <td>append@ispan.com.tw</td>
+                    <td>095563475</td>
+                    </tr>`;
+                $('tbody').prepend(content);
+                i++
+            })
+            $('#appendTo').click(function () {
+                $('#move').appendTo('tbody');
+            })
+            $('#prependTo').click(function () {
+                $('#move').prependTo('tbody');
+            })
+            $('#after').click(function () {
+                $('#move').after(`<tr>
+                    <td>${i} after</td>
+                    <td>append@ispan.com.tw</td>
+                    <td>095563475</td>
+                    </tr>`)
+                i++
+            })
+            $('#before').click(function () {
+                $('#move').before(`<tr>
+                    <td>${i} before</td>
+                    <td>append@ispan.com.tw</td>
+                    <td>095563475</td>
+                    </tr>`)
+                i++
+            })
+            $('#inserafter').click(function () {
+                $(`<tr>
+                    <td>${i} inserafter</td>
+                    <td>append@ispan.com.tw</td>
+                    <td>095563475</td>
+                    </tr>`).insertAfter('#move');
+                i++
+            })
+            $('#inserbefore').click(function () {
+                $(`<tr>
+                    <td>${i} inserafter</td>
+                    <td>append@ispan.com.tw</td>
+                    <td>095563475</td>
+                    </tr>`).insertBefore('#move');
+                i++
+            })
+
+
+            $('#empty').click(function () {
+                $('tbody').empty();
+            })
+
+            $('#remove').click(function () {
+                $('tbody').remove();
+            })
+
+
+
+        })
+
+
+    </script>
+</body>
+
+</html>

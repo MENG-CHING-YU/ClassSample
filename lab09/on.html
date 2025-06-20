@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lab1</title>
+    <style>
+        body {
+            font-size: 17px;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: aliceblue;
+        }
+
+        header {
+            background-color: black;
+            color: aquamarine;
+            Padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            width: 90%;
+
+            margin: auto;
+            padding: 10px;
+            float: left;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>ON事件</h1>
+    </header>
+    <div class="container">
+        <button id="btn">button</button>
+        <hr>
+        <button id="hello">hello</button>
+        <button id="on">on</button>
+        <button id="off">off</button>
+        <button id="one">one</button>
+        <hr>
+        <button id="add">add</button>
+        <ul>
+            <li>list1</li>
+            <li>list2</li>
+        </ul>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+
+        $(function () {
+            //多個事件綁一個函數
+            // $('$btn').on('click mouseenter contextmenu', function () {
+            //     console.log('hello');
+
+            // })
+            //多的事件綁多的函數
+            $('#btn').on({
+                click: function () {
+                    console.log('click');
+                },
+                mouseenter: function () {
+                    console.log('mouseenter');
+
+                },
+                contextmenu: function () {
+                    console.log('right click');
+
+                }
+            })
+            let sayhello = function () {
+                console.log('hello');
+
+            }
+            $('#on').click(function () {
+                $('#hello').on('click', sayhello);
+            })
+            $('#off').click(function () {
+                $('#hello').off('click', sayhello);
+            })
+            $('#one').one('click', function () {
+                console.log('one');
+
+            })
+
+            // $('li').click(function () {
+            //     console.log('123');
+
+            // })
+            $('ul').on('click', 'li', function () {
+                console.log('123');
+
+            })
+            let i = 3;
+            $('#add').click(function () {
+                $('ul').append(`<li>list ${i}</li>`)
+                i++;
+            })
+
+        })
+
+
+    </script>
+</body>
+
+</html>

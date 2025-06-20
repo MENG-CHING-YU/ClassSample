@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lab1</title>
+    <style>
+        body {
+            font-size: 17px;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: aliceblue;
+        }
+
+        header {
+            background-color: black;
+            color: aquamarine;
+            Padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            width: 90%;
+
+            margin: auto;
+            padding: 10px;
+            float: left;
+        }
+
+        img {
+            width: 200px;
+            height: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>attr() prop() addclass()</h1>
+    </header>
+    <div class="container">
+        <img src="../lab8/photo.jpg" alt="照片" title="風景">
+        <br>
+        <button id="getAttr">getAttr</button>
+        <button id="setAttr">setAttr</button>
+        <br>
+        <input type="checkbox" id="checkbox">同意
+        <br>
+        <button id="confirm" disabled>confirm</button>
+        <br>
+        <button id="setProp">setProp</button>
+        <button id="getProp">getProp</button>
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+
+        $(function () {
+            $('#getAttr').click(function () {
+                console.log(`img alt:${$('img').attr('alt')},
+        img title:${$('img').attr('title')},
+        img src:${$('img').attr('src')}`);
+
+            })
+
+            $('#setAttr').click(function () {
+                $('img').attr({
+                    src: "",
+                    title: 'null'
+                })
+
+            })
+            $('#getProp').click(function () {
+                let checked = $('#checkbox').prop('checked');
+                console.log(checked);
+
+            })
+            $('#getProp').click(function () {
+                let checked = $('#checkbox').prop('checked');
+                console.log(checked);
+
+            })
+            $('#setProp').click(function () {
+                let checked = $('#checkbox').prop('checked', true);
+
+
+            })
+            $('#checkbox').click(function () {
+                let checked = $(this).prop('checked');
+                if (checked) {
+                    $('#confirm').prop('disabled', false);
+                } else {
+                    $('confirm').prop('disabled', true)
+                }
+            })
+
+
+        })
+
+
+    </script>
+</body>
+
+</html>

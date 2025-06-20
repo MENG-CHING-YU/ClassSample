@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lab1</title>
+    <style>
+        body {
+            font-size: 17px;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: aliceblue;
+        }
+
+        header {
+            background-color: black;
+            color: aquamarine;
+            Padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            width: 90%;
+
+            margin: auto;
+            padding: 10px;
+            float: left;
+        }
+
+        .resize {
+            width: 400px;
+            height: 300px;
+            position: absolute;
+        }
+
+        img {
+            width: 400px;
+            height: 300px;
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Resize</h1>
+    </header>
+    <div class="container">
+        <div class="resize">
+            <img src="./photo.jpg" alt="">
+        </div>
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+
+        $(function () {
+            resizeImage();
+            $(window).resize(resizeImage);
+
+
+            function resizeImage() {
+                $(window).width();
+                $(window).height();
+                let windowWidth = $(window).width()
+                let windowHeight = $(window).height()
+                let divWidth = $('.resize').width();
+                let divHeight = $('.resize').height();
+                let left = (windowWidth - divWidth) / 2;
+                let top = (windowHeight - divHeight) / 2;
+                $('.resize').css({
+                    left: left,
+                    top: top
+                });
+            }
+
+        })
+
+
+    </script>
+</body>
+
+</html>

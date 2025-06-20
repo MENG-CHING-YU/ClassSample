@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lab1</title>
+    <style>
+        body {
+            font-size: 17px;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: aliceblue;
+        }
+
+        header {
+            background-color: black;
+            color: aquamarine;
+            Padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            width: 90%;
+
+            margin: auto;
+            padding: 10px;
+            float: left;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>text() html() cal()</h1>
+    </header>
+    <div class="container">
+        <h3 id="source">hello jQuery</h3>
+        <h3 id="target"></h3>
+        <button id="getText">get Text</button>
+        <button id="setText">set Text</button>
+        <hr>
+        <p><b>click</b>to change <span>html</span></p>
+        <button id="setHtml">set html</button>
+
+        <hr>
+        <input type="number" id="first">
+        <select name="" id="select">
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value="/">/</option>
+        </select>
+        <input type="number" id="second">
+        <button id="equals">=</button>
+        <input type="text" id='readonly'>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+
+        $(function () {
+            $('#getText').click(function () {
+                console.log($('#source').text());
+
+            })
+            $('#setText').click(function () {
+                $('#target').text('set Text');
+
+            })
+            $('p').one('click', function () {
+                $(this).text($(this).html())
+            })
+            $('#setHtml').click(function () {
+                $('p').html('<h1>set Html</h1>')
+            })
+            console.log($('#first').val());
+            $('#equals').click(function () {
+                let first = parseInt($('#first').val());
+                console.log($('#first').val());
+                let second = parseInt($('#second').val());
+                console.log($('#second').val());
+                let operator = $('#select').val();
+                let result;
+                if (operator === '+') {
+                    result = first + second;
+                } else if (operator === '-') {
+                    result = first - second;
+                } else if (operator === '*') {
+                    result = first * second;
+                } else if (operator === '/') {
+                    if (second !== 0) {
+                        result = first / second;
+                    } else {
+                        result = '錯誤：除以 0';
+                    }
+                } else {
+                    result = '未知運算符';
+                }
+
+                $('#readonly').val(result);
+
+
+            })
+
+        })
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lab04</title>
+    <style>
+        body {
+            font-size: 17px;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #fff;
+        }
+
+        header {
+            background-color: black;
+            color: lightgreen;
+            /* 內距 */
+            padding: 20px;
+            /* 文字置中 */
+            text-align: center;
+        }
+
+        .container {
+            width: 90%;
+            /* 外距 */
+            margin: auto;
+            padding: 10px;
+        }
+
+        #div {
+            width: 500px;
+            height: 100px;
+            background-color: lightblue;
+            padding: 10px;
+        }
+
+        p {
+            background-color: lightcoral;
+        }
+
+        span {
+            background-color: lightgreen;
+            font-style: italic;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Event</h1>
+    </header>
+    <div class="container">
+        <textarea name="" id="textarea"></textarea>
+        <hr>
+        <div id="div">
+            div element
+            <p>
+                p element
+                <span>span element</span>
+            </p>
+
+        </div>
+        <a href="https://www.notion.so/2154bddd28a2802ea429c89b9be45a4c#2164bddd28a280ba9812cd79ef80d0cc">Google</a>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script>
+        $(function () {
+            // javascript code
+            /*
+                1. element.on('事件名稱',函數)
+                2. element.事件名稱(函數)
+            */
+            $('#textarea').mousemove(function (event) {
+                console.log('123');
+                // console.log(event.type);
+                // console.log(event.which);
+                // console.log(event.target);//this
+                // console.log(event);
+                console.log(event.pageX)
+                console.log(event.pageY)
+                // event.keyCode
+            })
+            $('#div').click(function () {
+                console.log('div element was click');
+
+            })
+            $('p').click(function () {
+                console.log('9 element was click');
+
+            })
+            $('span').click(function () {
+                event.stopPropagation();
+                console.log('span element was click');
+
+            })
+            $('a').click(function (event) {
+                event.preventDefault(); // 阻止預設行為
+                console.log(`default ${event.type} was prevent`);
+
+            })
+        })
+    </script>
+</body>
+
+</html>

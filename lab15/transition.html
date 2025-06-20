@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lab1</title>
+    <style>
+        body {
+            font-size: 17px;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: aliceblue;
+        }
+
+        header {
+            background-color: black;
+            color: aquamarine;
+            Padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            width: 90%;
+
+            margin: auto;
+            padding: 10px;
+            float: left;
+        }
+
+        .box:hover {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            transition: 2s;
+            transition-timing-function: ease-in-out;
+        }
+
+
+        .box {
+            width: 100px;
+            height: 100px;
+            margin: 5px;
+
+        }
+
+        .box1 {
+            background-color: pink;
+            animation-name: example;
+            animation-duration: 2s;
+        }
+
+        @keyframes example {
+            from {
+                background-color: yellow;
+            }
+
+            to {
+                background-color: red;
+            }
+        }
+
+        .box2 {
+            background-color: lightblue;
+
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Transition</h1>
+    </header>
+    <div class="container">
+        <button id="slideUp">slieUp</button>
+        <button id="slideDown">slieDown</button>
+        <button id="jQslideUp">jQslieUp</button>
+        <button id="jQslideDown">jQslieDown</button>
+        <button id="slideToggle">slideToggle</button>
+        <button id="fadeIn">fadeIn</button>
+        <button id="fadeOut">fadeOut</button>
+        <button id="hide">hide</button>
+        <button id="show">show</button>
+        <hr>
+        <div class="box box1"></div>
+        <div class="box box2"></div>
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+
+
+
+
+        $(function () {
+            $('#jQslideUp').click(function () {
+                $('.box2').slideUp(1000);
+            })
+            $('#jQslideDown').click(function () {
+                $('.box2').slideDown(1000);
+            })
+
+            $('#slideToggle').click(function () {
+                $('.box2').slideToggle(1000);
+            })
+            $('#fadeOut').click(function () {
+                $('.box2').fadeOut(1000)
+            })
+            $('#fadeIn').click(function () {
+                $('.box2').fadeIn(1000)
+            })
+            $('#hide').click(function () {
+                $('.box2').hide(1000);
+            })
+            $('#show').click(function () {
+                $('.box2').show(1000, function () {
+                    $(this).css('background', 'pink')
+                });
+            })
+
+
+            let box = document.querySelector('.box1');
+            // window.getComputedStyle(element)
+            let boxStyle = window.getComputedStyle(box)
+            document.getElementById('slideUp').addEventListener('click',
+                function () {
+                    // console.log(box.style.height);
+                    // console.log(boxStyle.height);
+                    let timer = setInterval(slideUp, 20);
+                    function slideUp() {
+                        let newheight = parseInt(boxStyle.height) - 5;
+                        if (newheight <= 0) {
+                            clearInterval(timer);
+                            box.style.display = 'none';
+
+                        }
+                        box.style.height = newheight + "px";
+                    }
+
+
+                })
+            document.getElementById('slideDown').addEventListener('click',
+                function () {
+
+                    let timer = setInterval(slideDown, 20);
+                    function slideDown() {
+                        box.style.display = 'block';
+                        let newheight = parseInt(boxStyle.height) + 5;
+                        if (newheight >= 200) {
+                            clearInterval(timer);
+
+
+                        }
+                        box.style.height = newheight + "px";
+                    }
+
+
+                })
+
+        })
+
+
+    </script>
+</body>
+
+</html>
